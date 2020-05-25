@@ -22,8 +22,8 @@ public class ImportanciaDAOImpl implements ImportanciaDAO{
 	public List<Importancia> findAll() throws DataAccessException {
 		// TODO Auto-generated method stub
 		StringBuffer sb = new StringBuffer();
-		sb.append("select * from public.contribuyente");
-		Query query = entityManager.createNativeQuery(sb.toString(), Contribuyente.class);
+		sb.append("select * from public.importancia");
+		Query query = entityManager.createNativeQuery(sb.toString(), Importancia.class);
 		List<Importancia> resulset = query.getResultList();
 				
 		return resulset;
