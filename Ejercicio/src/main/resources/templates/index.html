@@ -1,50 +1,49 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlms:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Agregar Contribuyente</title>
 </head>
+<link rel="stylesheet" href="src/main/resources/static/style/main.css"  th:href = "@{/style/main.css}" type="text/css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <body>
-
-	<h1>Ingresar nuevo contribuyente</h1>
-	<form th:action="@{/save}" th:object="${contribuyente}"  method="post">
+	<nav class="navbar navbar-dark bg-dark">
+  		<span class="navbar-brand mb-0 h1">Guardar Contribuyente</span>
+	</nav>
 	
-		<label> Importancia:</label>
-		<select name="importancia" id="importancia" th:field="*{c_importancia}">
-			<option th:each="importancia, row: ${importancias}" th:value="${importancia.c_importancia}" th:text="${importancia.s_importancia}"></option>
+	<form method="post" th:action="@{/save}" th:object="${contribuyente}" class="main-form">
+		<div class="form-group">
+			<label for = "s_nombre">Nombre:</label><br>
+			<input type="text" id="s_nombre" name="s_nombre" th:field="*{s_nombre}" class="form-control" >
+			 <span th:errors="*{s_nombre}" style="color: red;"></span>
+			
+		</div>
+		<div class="form-group">
+			<label>Apellido:</label>
+			<input type="text" id="" th:field="*{s_apellido}" class="form-control" ><br>
+			 <span th:errors="*{s_apellido}" style="color: red;"></span>
+		</div>
+		<div class="form-group">
+			<label>Nit:</label>
+			<input type="text" id="s_nit" th:field="*{s_nit}" class="form-control">
+			 <span th:errors="*{s_nit}" style="color: red;"></span>
+		</div>
+		<div class="form-group">
+			<label>Importancia:</label>
+			  <select name="importancia" id="importancia" th:field="*{c_importancia}">
+            	<option th:each="importancia, row: ${importancias}" th:value="${importancia.c_importancia}" th:text="${importancia.s_importancia}"></option>
+        	  </select>
+        </div>
 		
-		</select>
-		<br>
+		<input type="submit" value="Guardar"  class="btn btn-primary">
 		
-		<label>Nombre del contribuyente: </label>
-		<input th:field="*{snombre}" type="text">
-		<span th:errors="*{snombre}" style="color:#E81505"></span><br>
-	
-		<label>Apellido del contribuyente: </label>
-		<input th:field="*{sapellido}" type="text">
-		<span th:errors="*{sapellido}" style="color:#E81505"></span><br>
-	
-		<label>Nit del contribuyente: </label>
-		<input th:field="*{snit}" type="text">
-		<span th:errors="*{snit}" style="color:#E81505"></span><br>
-	
-		<label>Fecha: </label>
-		<input th:field="*{ffecha}" type="date">
-		
-		<label>Importancia: </label>
-		<input th:field="*{cimportancia}" type="number">
-		<!--<label>Activo</label>
-		<input th:field="*{Estado}" type="radio" th:value="${true}">
-		<label>Inactivo</label>
-		<input th:field="*{Estado}" type="radio" th:value="${false}"><br>
-		  -->
-		<label>Importancia</label>
-		
-		
-		<input type="submit" value="Guardar"> 
-	
 	</form>
-\</body>
+	<br>
+	<form th:action="@{/contribuyente}" method="post" class="main-form" >
+		<input type="submit" value="Ver listado de contribuyentes">
+	</form>
+
+
+
+</body>
 </html>

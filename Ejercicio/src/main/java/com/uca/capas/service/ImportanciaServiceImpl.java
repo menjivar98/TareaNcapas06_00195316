@@ -20,5 +20,11 @@ public class ImportanciaServiceImpl implements ImportanciaService {
 	public List<Importancia> findAll() throws DataAccessException {
 		return importanciaDAO.findAll();
 	}
+
+	@Override
+	public Importancia findOne(Integer c_importancia) throws DataAccessException {
+		return importanciaDAO.findOne(c_importancia);
+		
+	}
 	
 }

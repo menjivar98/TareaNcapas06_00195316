@@ -29,36 +29,13 @@ public class ContribuyenteDAOImpl implements ContribuyenteDAO{
 		return resulset;
 	}
 
-	@Override
-	public Contribuyente findOne(Integer code) throws DataAccessException {
-		// TODO Auto-generated method stub
-		Contribuyente contribuyente = entityManager.find(Contribuyente.class,code);
-		return contribuyente;
-	}
-
+	
 	@Override
 	@Transactional
 	public void save(Contribuyente contribuyente) throws DataAccessException {
-		try {
-			if(contribuyente.getCcontribuyenrte() == null)
-			{
-				entityManager.persist(contribuyente);
-			}else 
-			{
-				entityManager.merge(contribuyente);
-				entityManager.flush();
-			}
-		}catch(Throwable e) {
-			e.printStackTrace();
-		}
-		
+		entityManager.persist(contribuyente);
 	}
 
-	@Override
-	public void delete(Integer codigoContribuyente) throws DataAccessException {
-		Contribuyente contribuyente = entityManager.find(Contribuyente.class, codigoContribuyente);
-		entityManager.remove(contribuyente);
-		
-	}
+	
 
 }

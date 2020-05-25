@@ -30,4 +30,11 @@ public class ImportanciaDAOImpl implements ImportanciaDAO{
 			
 	}
 
+	@Override
+	public Importancia findOne(Integer c_importancia) throws DataAccessException {
+
+		Importancia importancia = entityManager.find(Importancia.class, c_importancia);
+		return importancia;
+	}
+
 }

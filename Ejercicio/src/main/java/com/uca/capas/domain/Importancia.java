@@ -1,54 +1,42 @@
 package com.uca.capas.domain;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(schema = "public", name="importancia")
+@Table(schema="public", name="importancia")
 public class Importancia {
+
 	@Id
 	@Column(name="c_importancia")
-	private Integer cimportancia;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer c_importancia;
 	
 	@Column(name="s_importancia")
-	private String simportancia;
+	private String s_importancia;
 	
-	@OneToMany(mappedBy = "ccontribuyenrte",fetch = FetchType.EAGER)
-	private List<Contribuyente> contribuyente;
-
-	public Integer getCimportancia() {
-		return cimportancia;
+	public Importancia() {
+		
 	}
 
-	public void setCimportancia(Integer cimportancia) {
-		this.cimportancia = cimportancia;
+	public Integer getC_importancia() {
+		return c_importancia;
 	}
 
-	public String getSimportancia() {
-		return simportancia;
+	public void setC_importancia(Integer c_importancia) {
+		this.c_importancia = c_importancia;
 	}
 
-	public void setSimportancia(String simportancia) {
-		this.simportancia = simportancia;
+	public String getS_importancia() {
+		return s_importancia;
 	}
 
-	public List<Contribuyente> getContribuyente() {
-		return contribuyente;
+	public void setS_importancia(String s_importancia) {
+		this.s_importancia = s_importancia;
 	}
-
-	public void setContribuyente(List<Contribuyente> contribuyente) {
-		this.contribuyente = contribuyente;
-	}
-
-	
 	
 }

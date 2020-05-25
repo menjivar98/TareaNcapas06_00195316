@@ -2,7 +2,8 @@ package com.uca.capas.domain;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+
+//import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,27 +13,59 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(schema = "public", name=" contribuyente")
+@Table(schema="public", name="contribuyente")
 public class Contribuyente {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="c_contribuyente ")
-	private Integer ccontribuyenrte;
+	@Column(name="c_contribuyente")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer c_contribuyente;
 	
-	@Column(name="c_importancia")
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="c_importancia")
+	private Importancia importancia;
+	
+	@Transient
 	private Integer c_importancia;
 	
-	public Integer getC_importancia() {
-		return c_importancia;
+	@Size(message="Este campo solo tiener que tener 30 caracteres", max=30)
+	@NotEmpty(message="Este campo no puede ser vacio")
+	@Column(name="s_nombre")
+	private String s_nombre;
+	
+	@Size(message="Este campo solo tiene que tener 30 caracteres", max=30)
+	@NotEmpty(message="Este campo no puede ser vacio")
+	@Column(name="s_apellido")
+	private String s_apellido;
+	
+	@Size(message="Este campo solo tiene que tener 14 caracteres", max=14)
+	@NotEmpty(message="Este campo no puede ser vacio")
+	@Column(name="s_nit")
+	private String s_nit;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="f_fecha_ingreso")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	private Date f_fecha_ingreso;
+	
+	public Contribuyente() {}
+
+	public Integer getC_contribuyente() {
+		return c_contribuyente;
 	}
 
-	public void setC_importancia(Integer c_importancia) {
-		this.c_importancia = c_importancia;
+	public void setC_contribuyente(Integer c_contribuyente) {
+		this.c_contribuyente = c_contribuyente;
 	}
 
 	public Importancia getImportancia() {
@@ -43,98 +76,46 @@ public class Contribuyente {
 		this.importancia = importancia;
 	}
 
-
-
-
-	@Column(name="s_nombre")
-	private String snombre;
-	
-	@Column(name="s_apellido")
-	private String sapellido;
-	
-	@Column(name="s_nit ")
-	private String snit;
-	
-	@Column(name="	f_fecha_ingreso")
-	private Date ffecha;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="c_importancia")
-	private Importancia importancia;
-	
-	public Contribuyente() {}
-
-	public Integer getCcontribuyenrte() {
-		return ccontribuyenrte;
+	public Integer getC_importancia() {
+		return c_importancia;
 	}
 
-	public void setCcontribuyenrte(Integer ccontribuyenrte) {
-		this.ccontribuyenrte = ccontribuyenrte;
+	public void setC_importancia(Integer c_importancia) {
+		this.c_importancia = c_importancia;
 	}
 
-	
-	public String getSnombre() {
-		return snombre;
+	public String getS_nombre() {
+		return s_nombre;
 	}
 
-	public void setSnombre(String snombre) {
-		this.snombre = snombre;
+	public void setS_nombre(String s_nombre) {
+		this.s_nombre = s_nombre;
 	}
 
-	public String getSapellido() {
-		return sapellido;
+	public String getS_apellido() {
+		return s_apellido;
 	}
 
-	public void setSapellido(String sapellido) {
-		this.sapellido = sapellido;
+	public void setS_apellido(String s_apellido) {
+		this.s_apellido = s_apellido;
+	}
+
+	public String getS_nit() {
+		return s_nit;
+	}
+
+	public void setS_nit(String s_nit) {
+		this.s_nit = s_nit;
 	}
 	
-	public String getSnit() {
-		return snit;
+
+	public String getFfechaingreso() {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		return formatter.format(f_fecha_ingreso);
 	}
 
-	public void setSnit(String snit) {
-		this.snit = snit;
+	public void setFfechaingreso(Date f_fecha_ingreso) {
+		this.f_fecha_ingreso = f_fecha_ingreso;
 	}
-
-	public Date getFfecha() {
-		return ffecha;
-	}
-
-	public void setFfecha(Date ffecha) {
-		this.ffecha = ffecha;
-	}
-	
-	
-
-
-		//Delegate para conversion de fecha
-		public String getFechaDelegate(){
-			if(this.ffecha == null){
-				return "";
-			}
-			else{
-				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-				String shortdate = sdf.format(this.ffecha.getTime());
-				return shortdate;
-			}
-		}
-		
-/*	//Delegate para conversion de importancia
-	public String getImportancia() {
-		String Importancia = " "; 
-		if(this.cimportancia == null) {
-			return Importancia;
-		}else if(this.cimportancia == 1) {
-			Importancia ="Grande";
-		}else if(this.cimportancia == 2) {
-			Importancia = "Mediano";
-		}else {
-			Importancia ="Otros";
-		}
-		
-		
-		return Importancia;
-	}*/
 
 }

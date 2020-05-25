@@ -45,45 +45,39 @@ public class MainController {
 		return mav;
 	}
 	
-	@RequestMapping("/mostrarContribuyente")
-	public ModelAndView findOne(@RequestParam(value="codigo")int id) {
-		ModelAndView mav = new ModelAndView();
-		Contribuyente contribuyente = null;
-		try {
-			contribuyente = contribuyenteService.findOne(id);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		mav.addObject("contribuyente", contribuyente);
-		mav.setViewName("contribuyente");
-		
-		return mav;
-	}
+	
 	
 	@PostMapping("/save")
 	public ModelAndView guardar(@Valid @ModelAttribute Contribuyente contribuyente, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
 		
-		
-		
-			mav.setViewName("index");
-			contribuyenteService.save(contribuyente);
-			List <Contribuyente> contribuyentes = null;
+		if(result.hasErrors()) {
+			
+			List<Importancia> importancias = null;
+			
 			try {
-					contribuyentes = contribuyenteService.findAll();
+				importancias=importanciasService.findAll();
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+			mav.addObject("importancias", importancias);
+			mav.setViewName("index");
 			
-			mav.addObject("contribuyentes", contribuyentes );
-			mav.setViewName("Exito");
-			
-		
-		
-		
+		}else {
+			try {
+				contribuyenteService.save(contribuyente);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			contribuyente = new Contribuyente();
+			mav.setViewName("exito");
+		}
 		
 		return mav;
+		
+		
+		
+		
 		
 	}
 	
@@ -92,17 +86,18 @@ public class MainController {
 		ModelAndView mav = new ModelAndView();
 		
 		Contribuyente contribuyente = new Contribuyente();
-		List <Importancia> importancias = null;
+		List<Importancia> importancias = null;
+		
 		try {
-			importancias = importanciasService.findAll();
+			importancias=importanciasService.findAll();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		
 		mav.addObject("importancias", importancias);
 		mav.addObject("contribuyente", contribuyente);
 		mav.setViewName("index");
+		
 		return mav;
 	}
 	

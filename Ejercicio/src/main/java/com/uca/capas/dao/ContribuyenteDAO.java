@@ -10,10 +10,6 @@ public interface ContribuyenteDAO {
 	
 	public List<Contribuyente> findAll() throws DataAccessException;
 	
-	public Contribuyente findOne(Integer code) throws DataAccessException;
-	
-	public void save (Contribuyente contribuyente) throws DataAccessException;
-	 
-	public void delete(Integer codigoContribuyente) throws DataAccessException;
+	public void save(Contribuyente c) throws DataAccessException;
 	
 }

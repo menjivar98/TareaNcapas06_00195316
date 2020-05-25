@@ -4,6 +4,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <body>
 	
 	<table>
@@ -17,16 +18,18 @@
 		</thead>
 		<th:block th:each="contribuyente,row:${contribuyentes}">
 			<tr>
-				<th th:text="${contribuyente.ccontribuyenrte}">
-				<th th:text="${contribuyente.importancia}">
-				<th th:text="${contribuyente.snombre}">
-				<th th:text="${contribuyente.sapellido}">
-				<th th:text="${contribuyente.snit}">
-				<th th:text="${contribuyente.fechaDelegate}">
+				<th th:text="${contribuyente.c_contribuyente}">
+				<th th:text="${contribuyente.importancia.s_importancia}">
+				<th th:text="${contribuyente.s_nombre}">
+				<th th:text="${contribuyente.s_apellido}">
+				<th th:text="${contribuyente.s_nit}">
+				<th th:text="${contribuyente.fingresoDelegate}">
 			<tr>	
 		</th:block>
 	</table>
 	
+	<a href="/" class="btn btn-primary stretched-link">Regresar</a>
+
 	
 </body>
 </html>
