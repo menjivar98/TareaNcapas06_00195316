@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<body>
+
+	<h1>Ingresar nuevo contribuyente</h1>
+	<form th:action="@{/save}" th:object="${contribuyente}"  method="post">
+	
+		<label> Importancia:</label>
+		<select name="importancia" id="importancia" th:field="*{c_importancia}">
+			<option th:each="importancia, row: ${importancias}" th:value="${importancia.c_importancia}" th:text="${importancia.s_importancia}"></option>
+		
+		</select>
+		<br>
+		
+		<label>Nombre del contribuyente: </label>
+		<input th:field="*{snombre}" type="text">
+		<span th:errors="*{snombre}" style="color:#E81505"></span><br>
+	
+		<label>Apellido del contribuyente: </label>
+		<input th:field="*{sapellido}" type="text">
+		<span th:errors="*{sapellido}" style="color:#E81505"></span><br>
+	
+		<label>Nit del contribuyente: </label>
+		<input th:field="*{snit}" type="text">
+		<span th:errors="*{snit}" style="color:#E81505"></span><br>
+	
+		<label>Fecha: </label>
+		<input th:field="*{ffecha}" type="date">
+		
+		<label>Importancia: </label>
+		<input th:field="*{cimportancia}" type="number">
+		<!--<label>Activo</label>
+		<input th:field="*{Estado}" type="radio" th:value="${true}">
+		<label>Inactivo</label>
+		<input th:field="*{Estado}" type="radio" th:value="${false}"><br>
+		  -->
+		<label>Importancia</label>
+		
+		
+		<input type="submit" value="Guardar"> 
+	
+	</form>
+\</body>
+</html>
